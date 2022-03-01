@@ -1,0 +1,78 @@
+import telebot
+from telebot import types
+
+
+token = "5266655301:AAG9pOtmWTm3dUKuqn123l9SfTCN96gjS2I"
+bot = telebot.TeleBot(token)
+
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    keyboard = types.ReplyKeyboardMarkup()
+    keyboard.row("Хочу", "Не хочу", "/help", "/anime", "/start")
+    bot.send_message(message.chat.id, 'Привет! Хочешь узнать свежую информацию о МТУСИ?', reply_markup=keyboard)
+
+
+@bot.message_handler(commands=['help'])
+def start_message(message):
+    bot.send_message(message.chat.id, 'Я могу показать тебе список аниме, и посылать на сайт любимого вуза))) : )')
+    keyboard = types.ReplyKeyboardMarkup()
+    keyboard.row("/anime", "/start")
+    bot.send_message(message.chat.id, "Вот мои команды. Если хочешь вернуться в главное меню, напиши /start", reply_markup=keyboard)
+
+
+@bot.message_handler(commands=['anime'])
+def anime(message):
+    keyboard = types.ReplyKeyboardMarkup()
+    keyboard.row("Да", "Нет")
+    bot.send_message(message.chat.id, 'Аниме????????????', reply_markup=keyboard)
+
+
+@bot.message_handler(content_types=['text'])
+def answer(message):
+    if message.text.lower() == "Хочу":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://mtuci.ru/')
+    elif message.text.lower() == "Не хочу":
+        bot.send_message(message.chat.id, 'Тогда ты не МТУСИшник')
+    elif message.text.lower() == "да":
+        keyboard = types.ReplyKeyboardMarkup()
+        keyboard.row("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "/start")
+        bot.send_message(message.chat.id, "1.Атака титанов \n "
+                                          "2.Клинок рассекающий демонов \n "
+                                          "3.Хеллсинг \n "
+                                          "4.Скитальцы \n "
+                                          "5.Пламенная бригада пожарных \n "
+                                          "6.Мемуары Ванитаса \n "
+                                          "7.Реинкарнация безработного \n "
+                                          "8.Хантер Х хантер \n "
+                                          "9.Агент времени \n "
+                                          "10.Стальной Алхимик", reply_markup=keyboard)
+    elif message.text.lower() == "нет":
+        bot.send_message(message.chat.id, 'Ты не анимешник')
+    elif message.text.lower() == "1":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда:  https://ataka-titanov.com/')
+    elif message.text.lower() == "2":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда:  https://animego.org/anime/klinok-rassekayuschiy-demonov-kvartal-krasnyh-fonarey-1876')
+    elif message.text.lower() == "3":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/hellsing-voyna-s-nechistyu-872')
+    elif message.text.lower() == "4":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/skitalcy-169')
+    elif message.text.lower() == "5":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/enen-no-shouboutai-1102 ')
+    elif message.text.lower() == "6":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/memuary-vanitasa-1803')
+    elif message.text.lower() == "7":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/reinkarnaciya-bezrabotnogo-istoriya-o-priklyucheniyah-v-drugom-mire-1690')
+    elif message.text.lower() == "8":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда:  https://jut.su/hunter-hunter/')
+    elif message.text.lower() == "9":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда: https://animego.org/anime/agent-vremeni-1780')
+    elif message.text.lower() == "10":
+        bot.send_message(message.chat.id, 'Тогда тебе сюда:  https://animego.org/anime/stalnoy-alhimik-125')
+    else:
+        keyboard = types.ReplyKeyboardMarkup()
+        keyboard.row("Хочу", "Не хочу", "/help", "/anime", "/start")
+        bot.send_message(message.chat.id, 'Привет! Хочешь узнать свежую информацию о МТУСИ?', reply_markup=keyboard)
+
+
+bot.polling()
